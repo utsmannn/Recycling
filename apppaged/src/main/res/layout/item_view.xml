@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 8/18/19 3:55 AM
+  ~ Copyright (c) 2019 . All rights reserved.
+  ~ Last modified 8/16/19 10:36 PM
+  -->
+
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/img_view"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    tools:ignore="ContentDescription"
+    android:scaleType="centerCrop"
+    android:layout_margin="6dp"/>

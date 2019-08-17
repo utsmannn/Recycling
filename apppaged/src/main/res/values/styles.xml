@@ -1,0 +1,17 @@
+<!--
+  ~ Created by Muhammad Utsman on 8/18/19 3:55 AM
+  ~ Copyright (c) 2019 . All rights reserved.
+  ~ Last modified 8/18/19 3:37 AM
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>
