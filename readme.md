@@ -7,7 +7,7 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ![](https://i.ibb.co/JQg2gLS/carbon-8.png)
 
 
-##### Download
+### Download
 ***For standard adapter***
 ```gradle
 implementation 'com.utsman.recycling:recycling:0.1.1'
@@ -18,7 +18,7 @@ implementation 'com.utsman.recycling:recycling:0.1.1'
 implementation 'com.utsman.recycling-paged:recycling:0.1.1'
 ```
 
-##### Setup
+### Setup
 
 ***For standard*** use ```.setupAdapter<>```
 ```kotlin
@@ -44,9 +44,9 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 | ```setDivider(divider)``` | add divider |
 | ```submitList(list)``` | submit your list |
 | ```submitNetwork(networkState)``` | submit network state |
-| ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state is active |
+| ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state enabled |
 
-##### Bind
+### Bind
 In lamba of setup, use ```bind``` to instead viewholder 
 
 ```kotlin
@@ -71,7 +71,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 | ```position``` | item position |
 
 
-##### Layout Manager
+### Layout Manager
 Default layout manager is ```LinearLayoutManager```, you can set layout manager with
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
@@ -82,7 +82,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 }
 ```
 
-##### Submit List
+### Submit List
 You can set list / submit list inside lamba with ```submitList(list)```
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
@@ -94,7 +94,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 
 ### Network State Loader
 This library support for network loader, use paged setup is recommended
-##### Create your loader layout
+#### Create your loader layout
 ```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -124,7 +124,7 @@ This library support for network loader, use paged setup is recommended
 </LinearLayout>
 ```
 
-##### Create LoaderIdentifierId for identifier view and id
+#### Create LoaderIdentifierId for identifier view and id
 ```kotlin
 val identifierId = LoaderIdentifierId.Builder()
     .setLoaderRes(R.layout.item_loader)
@@ -133,14 +133,14 @@ val identifierId = LoaderIdentifierId.Builder()
     .build()
 ```
 
-##### Add identifier to your setup
+#### Add identifier to your setup
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
     ...
 
 }
 ```
-##### Fix progressBar position for grid layout
+#### Fix progressBar position for grid layout
 Use ```fixGridSpan(column_size)```
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
@@ -153,7 +153,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
 
 }
 ```
-##### For standard setup (not recommended)
+#### For standard setup (not recommended)
 Use ```EndlessScrollListener(layoutManager)``` for paging recycler
 ```kotlin
 recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) {
@@ -173,7 +173,7 @@ recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) {
 
 #### Sample
 [Pexel app](https://github.com/utsmannn/Recycling/tree/master/app/src/main/java/com/utsman/recycling/sample) <br>
-[pexel app paging](https://github.com/utsmannn/Recycling/tree/master/apppaged/src/main/java/com/utsman/recycling/samplepaged)
+[Pexel app paging](https://github.com/utsmannn/Recycling/tree/master/apppaged/src/main/java/com/utsman/recycling/samplepaged)
 
 
 ---
