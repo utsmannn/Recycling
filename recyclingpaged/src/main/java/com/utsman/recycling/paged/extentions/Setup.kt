@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.paged.adapter.RecyclingAdapter
 
 @Suppress("UNCHECKED_CAST")
-class Setup<T>(val layoutRes: Int, val recyclerView: RecyclerView, val identifierId: LoaderIdentifierId?) {
+class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: LoaderIdentifierId?) {
 
     var adapter = RecyclingAdapter<T>(layoutRes, identifierId)
     val context: Context = recyclerView.context
