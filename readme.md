@@ -1,9 +1,10 @@
 ## Recycling is Easy, No Adapter !
 [ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
+<br>
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
 Support normal and paged adapter RecyclerView base on Android Paging Library
 
-![](https://i.ibb.co/NYt3vYx/carbon-6.png)
+![](https://i.ibb.co/JQg2gLS/carbon-8.png)
 
 
 ##### Download
