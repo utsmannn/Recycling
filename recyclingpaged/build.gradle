@@ -18,7 +18,7 @@ ext {
 
     publishedGroupId = 'com.utsman.recycling-paged'
     artifact = 'recycling'
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.1.2'
 
     libraryDescription = 'One line setup recyclerview'
     siteUrl = 'https://github.com/utsmannn/Recycling'
@@ -39,7 +39,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
-        versionName "0.1.1"
+        versionName "0.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         main_recycler_view.setupAdapterPaged<Pexel>(R.layout.item_view, identifierId) {
             bind {
-                view.img_view.load(item?.src?.small)
-                view.setOnClickListener {
+                itemView.img_view.load(item?.src?.small)
+                itemView.setOnClickListener {
                     toast("Click on $position")
                 }
             }

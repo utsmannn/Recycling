@@ -38,14 +38,16 @@ class MainActivity : AppCompatActivity() {
                 .setIdTextViewError(R.id.error_text_view)
                 .build()
 
-        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view, identifierId) {
+        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view) {
 
             bind {
-                view.img_view.load(item?.src?.small)
-                view.setOnClickListener {
+                itemView.img_view.load(item?.src?.small)
+                itemView.setOnClickListener {
                     toast("Click on $position")
                 }
             }
+
+
 
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
             setLayoutManager(layoutManager)
@@ -69,8 +71,8 @@ class MainActivity : AppCompatActivity() {
             setup.submitList(it)
         })
 
-        viewModel.getNetworkState().observe(this, Observer {
+        /*viewModel.getNetworkState().observe(this, Observer {
             setup.submitNetworkState(it)
-        })
+        })*/
     }
 }

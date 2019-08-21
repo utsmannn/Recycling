@@ -8,4 +8,4 @@ package com.utsman.recycling.extentions
 
 import android.view.View
 
-class Binding<T>(val view: View, val item: T?, val position: Int)
+class Binding<T>(val itemView: View, val item: T?, val position: Int)
