@@ -55,8 +55,8 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
     // setup your holder
     bind {
         // bind view
-        view.img_view.load(item?.url)
-        view.setOnClickListener {
+        itemView.img_view.load(item?.url)
+        itemView.setOnClickListener {
             toast("Click on $position")
         }
     }
