@@ -10,12 +10,12 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ### Download
 ***For standard adapter***
 ```gradle
-implementation 'com.utsman.recycling:recycling:0.1.1'
+implementation 'com.utsman.recycling:recycling:0.1.2'
 ```
 
 ***For paged adapter***
 ```gradle
-implementation 'com.utsman.recycling-paged:recycling:0.1.1'
+implementation 'com.utsman.recycling-paged:recycling:0.1.2'
 ```
 
 ### Setup
@@ -66,7 +66,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 
 | Bind parameter  | Desc |
 |---|---|
-| ```view```  | itemView |
+| ```itemView```  | itemView |
 | ```item``` | item |
 | ```position``` | item position |
 
