@@ -7,6 +7,7 @@
 package com.utsman.recycling.paged.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,7 +25,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
 ) {
 
     private var item: T? = null
-    private lateinit var setup: Binding<*>.() -> Unit
+    private lateinit var setup: Binding<*>.(view: View, position: Int, item: Any?) -> Unit
     private var networkState: NetworkState? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -90,7 +91,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         }
     }
 
-    fun submitNetworkState(newNetworkState: NetworkState?) {
+    internal fun submitNetworkState(newNetworkState: NetworkState?) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
         this.networkState = newNetworkState
@@ -106,13 +107,13 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         }
     }
 
-    fun setBinding(binding: Binding<*>.() -> Unit) {
+    internal fun setBinding(binding: Binding<*>.(view: View, position: Int, item: Any?) -> Unit) {
         this.setup = binding
     }
 
     private fun getItem(): T? = item
 
-    fun setGridSpan(column: Int) = object : GridLayoutManager.SpanSizeLookup() {
+    internal fun setGridSpan(column: Int) = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (getItemViewType(position)) {
                 ITEM -> 1

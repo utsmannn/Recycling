@@ -8,6 +8,7 @@ package com.utsman.recycling.samplepaged
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,23 +34,25 @@ class MainActivity : AppCompatActivity() {
             .setIdTextViewError(R.id.error_text_view)
             .build()
 
-        main_recycler_view.setupAdapterPaged<Pexel>(R.layout.item_view, identifierId) {
-            bind {
+
+        main_recycler_view.setupAdapterPaged<Pexel>(R.layout.item_view, identifierId) { adapter, context, list ->
+
+            bind { itemView, position, item ->
                 itemView.img_view.load(item?.src?.small)
                 itemView.setOnClickListener {
-                    toast("Click on $position")
+                    context.toast("Click on $position - ${adapter.itemCount} - ${list?.size}")
                 }
             }
 
-            val layoutManager = GridLayoutManager(this@MainActivity, 2)
+            val layoutManager = GridLayoutManager(context, 2)
             setLayoutManager(layoutManager)
             fixGridSpan(2)
 
-            viewModel.getCuratedPhoto().observe(this@MainActivity, Observer {
+            viewModel.getCuratedPhoto().observe(context as LifecycleOwner, Observer {
                 submitList(it)
             })
 
-            viewModel.getLoader().observe(this@MainActivity, Observer {
+            viewModel.getLoader().observe(context as LifecycleOwner, Observer {
                 submitNetwork(it)
             })
         }

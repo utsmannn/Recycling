@@ -8,6 +8,7 @@ package com.utsman.recycling.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,7 +24,7 @@ import com.utsman.recycling.viewholder.NetworkViewHolder
 class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifierId: LoaderIdentifierId? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var item: T? = null
-    private lateinit var setup: Binding<*>.() -> Unit
+    private lateinit var setup: Binding<*>.(view: View, position: Int, item: Any?) -> Unit
     private var networkState: NetworkState? = null
     private val list: MutableList<T> = mutableListOf()
     private var diffResult: DiffUtil.DiffResult? = null
@@ -90,7 +91,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         }
     }
 
-    fun submitNetwork(newNetworkState: NetworkState?) {
+    internal fun submitNetwork(newNetworkState: NetworkState?) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
         this.networkState = newNetworkState
@@ -106,13 +107,13 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         }
     }
 
-    fun setBinding(binding: Binding<*>.() -> Unit) {
+    internal fun setBinding(binding: Binding<*>.(view: View, position: Int, item: Any?) -> Unit) {
         this.setup = binding
     }
 
     private fun getItem(): T? = item
 
-    fun addList(list: List<T>?) {
+    internal fun addList(list: List<T>?) {
         Log.i("utsman", "submitting list.. ${list?.size}")
         if (list != null) {
             val diffUtil = ItemDiffUtil(this.list, list)
@@ -124,9 +125,9 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         notifyDataSetChanged()
     }
 
-    fun getCurrentList(): List<T> = list
+    internal fun getCurrentList(): List<T> = list
 
-    fun setGridSpan(column: Int) = object : GridLayoutManager.SpanSizeLookup() {
+    internal fun setGridSpan(column: Int) = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (getItemViewType(position)) {
                 ITEM -> 1

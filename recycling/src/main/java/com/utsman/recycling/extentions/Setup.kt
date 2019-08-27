@@ -8,16 +8,15 @@ package com.utsman.recycling.extentions
 
 import android.content.Context
 import android.util.Log
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.view.View
+import androidx.recyclerview.widget.*
 import com.utsman.recycling.adapter.RecyclingAdapter
+import com.utsman.recycling.listener.EndlessScrollListener
 
 @Suppress("UNCHECKED_CAST")
 class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: LoaderIdentifierId?) {
-    val adapter = RecyclingAdapter<T>(layout, identifierId)
-    val context: Context = recyclerView.context
+    internal val adapter = RecyclingAdapter<T>(layout, identifierId)
+    internal val context: Context = recyclerView.context
 
     fun getList(): List<T> = adapter.getCurrentList()
 
@@ -42,11 +41,34 @@ class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: Loader
         (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup = adapter.setGridSpan(column)
     }
 
-    fun bind(bind: Binding<T>.() -> Unit) {
-        adapter.setBinding(bind as Binding<*>.() -> Unit)
+    fun onPagingListener(layoutManager: LinearLayoutManager, onPaging: EndlessScrollListener.(page: Int, itemCount: Int) -> Unit) {
+        recyclerView.addOnScrollListener(object : EndlessScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                onPaging(this, page, totalItemsCount)
+            }
+        })
     }
 
-    //fun getLayoutManager(): RecyclerView.LayoutManager = recyclerView.layoutManager!!
+    fun onPagingListener(layoutManager: GridLayoutManager, onPaging: EndlessScrollListener.(page: Int, itemCount: Int) -> Unit) {
+        recyclerView.addOnScrollListener(object : EndlessScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                onPaging(this, page, totalItemsCount)
+            }
+        })
+    }
+
+    fun onPagingListener(layoutManager: StaggeredGridLayoutManager, onPaging: EndlessScrollListener.(page: Int, itemCount: Int) -> Unit) {
+        recyclerView.addOnScrollListener(object : EndlessScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                onPaging(this, page, totalItemsCount)
+            }
+        })
+    }
+
+
+    fun bind(bind: Binding<T>.(itemView: View, position: Int, item: T?) -> Unit) {
+        adapter.setBinding(bind as Binding<*>.(view: View, position: Int, item: Any?) -> Unit)
+    }
 
     init {
         recyclerView.layoutManager = LinearLayoutManager(context)

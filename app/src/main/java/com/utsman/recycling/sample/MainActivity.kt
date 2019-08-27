@@ -7,6 +7,7 @@
 package com.utsman.recycling.sample
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -38,15 +39,14 @@ class MainActivity : AppCompatActivity() {
                 .setIdTextViewError(R.id.error_text_view)
                 .build()
 
-        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view) {
+        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view, identifierId) { adapter, context, list ->
 
-            bind {
+            bind { itemView, position, item ->
                 itemView.img_view.load(item?.src?.small)
                 itemView.setOnClickListener {
-                    toast("Click on $position")
+                    Toast.makeText(context, "${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
                 }
             }
-
 
 
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -54,13 +54,10 @@ class MainActivity : AppCompatActivity() {
             fixGridSpan(2)
 
             setupData(this, 1)
-            main_recycler_view.addOnScrollListener(object : EndlessScrollListener(layoutManager) {
-                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                    toast("$page, $totalItemsCount")
-                    setupData(this@setupAdapter, page+1)
-                }
 
-            })
+            onPagingListener(layoutManager) { page, itemCount ->
+                setupData(this@setupAdapter, page+1)
+            }
         }
 
     }
@@ -71,8 +68,8 @@ class MainActivity : AppCompatActivity() {
             setup.submitList(it)
         })
 
-        /*viewModel.getNetworkState().observe(this, Observer {
+        viewModel.getNetworkState().observe(this, Observer {
             setup.submitNetworkState(it)
-        })*/
+        })
     }
 }

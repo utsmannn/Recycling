@@ -6,10 +6,14 @@
 
 package com.utsman.recycling.paged
 
+import android.content.Context
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
+import com.utsman.recycling.paged.adapter.RecyclingAdapter
 import com.utsman.recycling.paged.extentions.LoaderIdentifierId
 import com.utsman.recycling.paged.extentions.Setup
 
-fun <T> RecyclerView.setupAdapterPaged(layoutRes: Int, loaderIdentifierId: LoaderIdentifierId? = null, setup: Setup<T>.() -> Unit) {
-    setup(Setup(layoutRes, this, loaderIdentifierId))
+fun <T> RecyclerView.setupAdapterPaged(layoutRes: Int, loaderIdentifierId: LoaderIdentifierId? = null, setup: Setup<T>.(adapter: RecyclingAdapter<T>, context: Context, list: PagedList<T>?) -> Unit) {
+    val setupAdapter = Setup<T>(layoutRes, this, loaderIdentifierId)
+    setup(setupAdapter, setupAdapter.adapter, setupAdapter.context, setupAdapter.getList())
 }

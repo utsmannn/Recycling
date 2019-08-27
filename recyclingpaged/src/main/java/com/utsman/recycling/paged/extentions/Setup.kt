@@ -8,6 +8,7 @@ package com.utsman.recycling.paged.extentions
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,8 +19,8 @@ import com.utsman.recycling.paged.adapter.RecyclingAdapter
 @Suppress("UNCHECKED_CAST")
 class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: LoaderIdentifierId?) {
 
-    var adapter = RecyclingAdapter<T>(layoutRes, identifierId)
-    val context: Context = recyclerView.context
+    internal var adapter = RecyclingAdapter<T>(layoutRes, identifierId)
+    internal val context: Context = recyclerView.context
 
     fun getList(): PagedList<T>? = adapter.currentList
 
@@ -44,8 +45,8 @@ class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: Loa
         (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup = adapter.setGridSpan(column)
     }
 
-    fun bind(bind: Binding<T>.() -> Unit) {
-        adapter.setBinding(bind as Binding<*>.() -> Unit)
+    fun bind(bind: Binding<T>.(itemView: View, position: Int, item: T?) -> Unit) {
+        adapter.setBinding(bind as Binding<*>.(view: View, position: Int, item: Any?) -> Unit)
     }
 
     init {
