@@ -10,26 +10,26 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ### Download
 ***For standard adapter***
 ```gradle
-implementation 'com.utsman.recycling:recycling:0.1.2'
+implementation 'com.utsman.recycling:recycling:0.1.3'
 ```
 
 ***For paged adapter***
 ```gradle
-implementation 'com.utsman.recycling-paged:recycling:0.1.2'
+implementation 'com.utsman.recycling-paged:recycling:0.1.3'
 ```
 
 ### Setup
 
 ***For standard*** use ```.setupAdapter<>```
 ```kotlin
-recyclerView.setupAdapter<Item>(R.layout.item_view) {
+recyclerView.setupAdapter<Item>(R.layout.item_view) { adapter, context, list ->
     ...
 }
 ```
 
 ***For paging*** use ```.setupAdapterPaged<>```
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     ...
 }
 ```
@@ -39,21 +39,22 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 | ```bind { }``` | setup your holder |
 | ```adapter```  | get adapter |
 | ```context``` | get context |
-| ```getList()``` | get current list |
+| ```list``` | get current list |
 | ```setLayoutManager(layout_manager)``` | setup layout manager |
 | ```setDivider(divider)``` | add divider |
 | ```submitList(list)``` | submit your list |
 | ```submitNetwork(networkState)``` | submit network state |
 | ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state enabled |
+| ```onPagingListener(layoutManager)``` | paging helper for standard recycler view |
 
 ### Bind
 In lamba of setup, use ```bind``` to instead viewholder 
 
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     
     // setup your holder
-    bind {
+    bind { itemView, position, item ->
         // bind view
         itemView.img_view.load(item?.url)
         itemView.setOnClickListener {
@@ -74,7 +75,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 ### Layout Manager
 Default layout manager is ```LinearLayoutManager```, you can set layout manager with
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     
     // setup your layout manager
     setLayoutManager(GridLayoutManager(context))
@@ -85,7 +86,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
 ### Submit List
 You can set list / submit list inside lamba with ```submitList(list)```
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     ...
     
     submitList(yourList)
@@ -135,7 +136,7 @@ val identifierId = LoaderIdentifierId.Builder()
 
 #### Add identifier to your setup
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
     ...
 
 }
@@ -143,7 +144,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
 #### Fix progressBar position for grid layout
 Use ```fixGridSpan(column_size)```
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
 
     ...
     
@@ -156,17 +157,13 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) {
 #### For standard setup (not recommended)
 Use ```EndlessScrollListener(layoutManager)``` for paging recycler
 ```kotlin
-recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) {
+recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
 
     ...
    
-    recyclerView.addOnScrollListener(object : EndlessScrollListener(layoutManager) {
-        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-            
-            // setup list after last item with config page+1
-        }
-
-    })
+    onPagingListener(layoutManager) { page, itemCount ->
+        // setup data with page + 1
+    }
 
 }
 ```
