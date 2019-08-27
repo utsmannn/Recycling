@@ -4,7 +4,7 @@
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
 Support normal and paged adapter RecyclerView base on Android Paging Library
 
-![](https://i.ibb.co/4svM0TV/carbon-11.png)
+![](https://i.ibb.co/DkQ1Lmn/carbon.png)
 
 
 ### Download
