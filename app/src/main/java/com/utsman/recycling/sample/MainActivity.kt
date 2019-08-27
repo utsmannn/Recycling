@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             bind { itemView, position, item ->
                 itemView.img_view.load(item?.src?.small)
                 itemView.setOnClickListener {
-                    Toast.makeText(context, "${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "wee ${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
                 }
             }
 
