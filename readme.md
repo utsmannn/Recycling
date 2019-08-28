@@ -135,12 +135,13 @@ val identifierId = LoaderIdentifierId.Builder()
 ```
 
 #### Add identifier to your setup
-```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
+<pre>
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view, <b>identifierId</b>) { adapter, context, list ->
     ...
 
 }
-```
+</pre>
+
 #### Fix progressBar position for grid layout
 Use ```fixGridSpan(column_size)```
 ```kotlin
@@ -155,7 +156,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter
 }
 ```
 #### For standard setup (not recommended)
-Use ```EndlessScrollListener(layoutManager)``` for paging recycler
+Use ```onPagingListener(layoutManager)``` for paging recycler
 ```kotlin
 recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
 
