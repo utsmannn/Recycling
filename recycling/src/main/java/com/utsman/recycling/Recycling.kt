@@ -12,7 +12,7 @@ import com.utsman.recycling.adapter.RecyclingAdapter
 import com.utsman.recycling.extentions.LoaderIdentifierId
 import com.utsman.recycling.extentions.Setup
 
-fun <T> RecyclerView.setupAdapter(layout: Int, identifierId: LoaderIdentifierId? = null, setup: Setup<T>.(adapter: RecyclingAdapter<T>, context: Context, list: List<T>) -> Unit) {
+fun <T> RecyclerView.setupAdapter(layout: Int, identifierId: LoaderIdentifierId? = null, setup: Setup<T>.(adapter: RecyclingAdapter<T>, context: Context, list: List<T?>) -> Unit) {
     val setupAdapter = Setup<T>(layout, this, identifierId)
 
     setup(setupAdapter, setupAdapter.adapter, setupAdapter.context, setupAdapter.getList())

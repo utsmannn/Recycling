@@ -34,6 +34,8 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 }
 ```
 
+#### Setup Parameter
+
 | Setup parameter  | Desc |
 |---|---|
 | ```bind { }``` | setup your holder |
@@ -46,6 +48,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```submitNetwork(networkState)``` | submit network state |
 | ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state enabled |
 | ```onPagingListener(layoutManager)``` | paging helper for standard recycler view |
+| ```submitItem(item)``` | add item in list (**only for normal adapter**) |
 
 ### Bind
 In lamba of setup, use ```bind``` to instead viewholder 
@@ -128,7 +131,7 @@ This library support for network loader, use paged setup is recommended
 #### Create LoaderIdentifierId for identifier view and id
 ```kotlin
 val identifierId = LoaderIdentifierId.Builder()
-    .setLoaderRes(R.layout.item_loader)
+    .setLoaderRes(R.layout.item_loader) // for normal adapter use .setLayoutRes(layout)
     .setIdProgressLoader(R.id.progress_circular)
     .setIdTextViewError(R.id.error_text_view)
     .build()
@@ -149,7 +152,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter
 
     ...
     
-    val layoutManager = GridLayoutManager(this@MainActivity, 2)
+    val layoutManager = GridLayoutManager(context, 2)
     setLayoutManager(layoutManager)
     fixGridSpan(2)
 

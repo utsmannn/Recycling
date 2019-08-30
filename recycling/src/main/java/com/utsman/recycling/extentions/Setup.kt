@@ -18,7 +18,7 @@ class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: Loader
     internal val adapter = RecyclingAdapter<T>(layout, identifierId)
     internal val context: Context = recyclerView.context
 
-    fun getList(): List<T> = adapter.getCurrentList()
+    fun getList(): List<T?> = adapter.getCurrentList()
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager)  {
         recyclerView.layoutManager = layoutManager
@@ -39,6 +39,10 @@ class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: Loader
 
     fun fixGridSpan(column: Int) {
         (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup = adapter.setGridSpan(column)
+    }
+
+    fun submitItem(item: T?) {
+        adapter.addItem(item)
     }
 
     fun onPagingListener(layoutManager: LinearLayoutManager, onPaging: EndlessScrollListener.(page: Int, itemCount: Int) -> Unit) {

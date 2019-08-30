@@ -33,7 +33,6 @@ class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: Loa
     }
 
     fun submitList(list: PagedList<T>?) {
-        Log.i("anjay", "taiii")
         adapter.submitList(list)
     }
 

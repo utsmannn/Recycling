@@ -26,7 +26,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
     private var item: T? = null
     private lateinit var setup: Binding<*>.(view: View, position: Int, item: Any?) -> Unit
     private var networkState: NetworkState? = null
-    private val list: MutableList<T> = mutableListOf()
+    private val list: MutableList<T?> = mutableListOf()
     private var diffResult: DiffUtil.DiffResult? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -111,6 +111,11 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         this.setup = binding
     }
 
+    internal fun addItem(item: T?) {
+        list.add(item)
+        notifyDataSetChanged()
+    }
+
     private fun getItem(): T? = item
 
     internal fun addList(list: List<T>?) {
@@ -125,7 +130,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         notifyDataSetChanged()
     }
 
-    internal fun getCurrentList(): List<T> = list
+    internal fun getCurrentList(): List<T?> = list
 
     internal fun setGridSpan(column: Int) = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {

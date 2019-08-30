@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             setLayoutManager(layoutManager)
             fixGridSpan(2)
 
-            setupData(this, 1)
+            //setupData(this, 1)
 
             onPagingListener(layoutManager) { page, itemCount ->
                 setupData(this@setupAdapter, page+1)
