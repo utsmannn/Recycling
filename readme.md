@@ -38,11 +38,11 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 
 | Setup parameter  | Desc |
 |---|---|
-| ```bind { }``` | setup your holder |
+| ```bind { }``` | recycling your holder |
 | ```adapter```  | get adapter |
 | ```context``` | get context |
 | ```list``` | get current list |
-| ```setLayoutManager(layout_manager)``` | setup layout manager |
+| ```setLayoutManager(layout_manager)``` | recycling layout manager |
 | ```setDivider(divider)``` | add divider |
 | ```submitList(list)``` | submit your list |
 | ```submitNetwork(networkState)``` | submit network state |
@@ -51,12 +51,12 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```submitItem(item)``` | add item in list (**only for normal adapter**) |
 
 ### Bind
-In lamba of setup, use ```bind``` to instead viewholder 
+In lamba of recycling, use ```bind``` to instead viewholder 
 
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     
-    // setup your holder
+    // recycling your holder
     bind { itemView, position, item ->
         // bind view
         itemView.img_view.load(item?.url)
@@ -80,7 +80,7 @@ Default layout manager is ```LinearLayoutManager```, you can set layout manager 
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
     
-    // setup your layout manager
+    // recycling your layout manager
     setLayoutManager(GridLayoutManager(context))
 
 }
@@ -97,7 +97,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 ```
 
 ### Network State Loader
-This library support for network loader, use paged setup is recommended
+This library support for network loader, use paged recycling is recommended
 #### Create your loader layout
 ```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -137,7 +137,7 @@ val identifierId = LoaderIdentifierId.Builder()
     .build()
 ```
 
-#### Add identifier to your setup
+#### Add identifier to your recycling
 <pre>
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view, <b>identifierId</b>) { adapter, context, list ->
     ...
@@ -158,7 +158,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter
 
 }
 ```
-#### For standard setup (not recommended)
+#### For standard recycling (not recommended)
 Use ```onPagingListener(layoutManager)``` for paging recycler
 ```kotlin
 recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
@@ -166,7 +166,7 @@ recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) { adapter, con
     ...
    
     onPagingListener(layoutManager) { page, itemCount ->
-        // setup data with page + 1
+        // recycling data with page + 1
     }
 
 }

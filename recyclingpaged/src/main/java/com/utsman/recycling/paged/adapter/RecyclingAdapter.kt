@@ -20,13 +20,18 @@ import com.utsman.recycling.paged.extentions.NetworkState
 import com.utsman.recycling.paged.viewholder.BaseViewHolder
 import com.utsman.recycling.paged.viewholder.NetworkViewHolder
 
-class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifierId: LoaderIdentifierId? = null) : PagedListAdapter<T, RecyclerView.ViewHolder>(
+class RecyclingAdapter<T>(private val layoutRes: Int) : PagedListAdapter<T, RecyclerView.ViewHolder>(
     BaseDiffUtil()
 ) {
 
     private var item: T? = null
     private lateinit var setup: Binding<*>.(view: View, position: Int, item: Any?) -> Unit
     private var networkState: NetworkState? = null
+    private var loaderIdentifierId: LoaderIdentifierId? = null
+
+    internal fun addIdentifierId(loaderIdentifierId: LoaderIdentifierId) {
+        this.loaderIdentifierId = loaderIdentifierId
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

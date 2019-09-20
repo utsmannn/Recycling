@@ -24,7 +24,7 @@ class NetworkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         progressLoader?.visibility = toVisibility(networkState?.status == Status.RUNNING)
         textView?.visibility = toVisibility(networkState?.status == Status.FAILED)
 
-        textView?.text = "Network error: ${networkState?.msg}"
+        textView?.text = networkState?.msg
     }
 
     private fun toVisibility(constraint: Boolean): Int {

@@ -17,19 +17,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.paged.adapter.RecyclingAdapter
 
 @Suppress("UNCHECKED_CAST")
-class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: LoaderIdentifierId?) {
+class Recycling<T>(layoutRes: Int, val recyclerView: RecyclerView) {
 
-    internal var adapter = RecyclingAdapter<T>(layoutRes, identifierId)
+    internal var adapter = RecyclingAdapter<T>(layoutRes)
     internal val context: Context = recyclerView.context
 
     fun getList(): PagedList<T>? = adapter.currentList
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager)  {
         recyclerView.layoutManager = layoutManager
-    }
-
-    fun setDivider(orientation: Int) {
-        recyclerView.addItemDecoration(DividerItemDecoration(context, orientation))
     }
 
     fun submitList(list: PagedList<T>?) {
@@ -42,6 +38,12 @@ class Setup<T>(layoutRes: Int, val recyclerView: RecyclerView, identifierId: Loa
 
     fun fixGridSpan(column: Int) {
         (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup = adapter.setGridSpan(column)
+    }
+
+    fun addLoader(layoutRes: Int, loader: LoaderIdentifierId.() -> Unit) {
+        val loaderIdentifierId = LoaderIdentifierId(layoutRes = layoutRes)
+        loader(loaderIdentifierId)
+        adapter.addIdentifierId(loaderIdentifierId)
     }
 
     fun bind(bind: Binding<T>.(itemView: View, position: Int, item: T?) -> Unit) {

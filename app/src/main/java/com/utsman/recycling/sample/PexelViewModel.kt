@@ -27,7 +27,7 @@ class PexelViewModel : ViewModel() {
         instance.getCuratedPhoto(perPage, page)
             .enqueue(object : Callback<Responses> {
                 override fun onFailure(call: Call<Responses>, t: Throwable) {
-                    networkState.postValue(NetworkState.error(t.localizedMessage))
+                    networkState.postValue(NetworkState.error("error network: ${t.message}"))
                 }
 
                 override fun onResponse(call: Call<Responses>, response: Response<Responses>) {

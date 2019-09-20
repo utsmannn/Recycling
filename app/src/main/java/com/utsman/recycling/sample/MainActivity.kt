@@ -12,14 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.*
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.load
-import com.utsman.recycling.core.toast
-import com.utsman.recycling.extentions.LoaderIdentifierId
-import com.utsman.recycling.extentions.Setup
-import com.utsman.recycling.listener.EndlessScrollListener
+import com.utsman.recycling.extentions.Recycling
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_view.view.*
 
@@ -33,13 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val identifierId = LoaderIdentifierId.Builder()
-                .setLayoutRes(R.layout.item_loader)
-                .setIdProgressLoader(R.id.progress_circular)
-                .setIdTextViewError(R.id.error_text_view)
-                .build()
-
-        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view, identifierId) { adapter, context, list ->
+        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view) { adapter, context, list ->
 
             bind { itemView, position, item ->
                 itemView.img_view.load(item?.src?.small)
@@ -48,12 +38,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            addLoader(R.layout.item_loader) {
+                idLoader = R.id.progress_circular
+                idTextError = R.id.error_text_view
+            }
+
+            /*addLoader { error ->
+                layoutRes = R.layout.item_loader
+                idLoader = R.id.progress_circular
+                idTextError = R.id.error_text_view
+
+                errorMsg = "aaaaaaaa ----- $error"
+            }*/
+
+
 
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
             setLayoutManager(layoutManager)
             fixGridSpan(2)
 
-            //setupData(this, 1)
+            setupData(this, 1)
 
             onPagingListener(layoutManager) { page, itemCount ->
                 setupData(this@setupAdapter, page+1)
@@ -63,13 +67,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupData(setup: Setup<Pexel>, page: Int) {
+    private fun setupData(recycling: Recycling<Pexel>, page: Int) {
         viewModel.getCuratedPhoto(20, page).observe(this, Observer {
-            setup.submitList(it)
+            recycling.submitList(it)
         })
 
         viewModel.getNetworkState().observe(this, Observer {
-            setup.submitNetworkState(it)
+            recycling.submitNetworkState(it)
         })
     }
 }

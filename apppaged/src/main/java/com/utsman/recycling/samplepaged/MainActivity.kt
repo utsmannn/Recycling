@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.load
 import com.utsman.recycling.core.toast
-import com.utsman.recycling.paged.extentions.LoaderIdentifierId
 import com.utsman.recycling.paged.setupAdapterPaged
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_view.view.*
@@ -28,14 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProviders.of(this)[PexelViewModel::class.java]
 
-        val identifierId = LoaderIdentifierId.Builder()
-            .setLoaderRes(R.layout.item_loader)
-            .setIdProgressLoader(R.id.progress_circular)
-            .setIdTextViewError(R.id.error_text_view)
-            .build()
-
-
-        main_recycler_view.setupAdapterPaged<Pexel>(R.layout.item_view, identifierId) { adapter, context, list ->
+        main_recycler_view.setupAdapterPaged<Pexel>(R.layout.item_view) { adapter, context, list ->
 
             bind { itemView, position, item ->
                 itemView.img_view.load(item?.src?.small)
@@ -47,6 +39,11 @@ class MainActivity : AppCompatActivity() {
             val layoutManager = GridLayoutManager(context, 2)
             setLayoutManager(layoutManager)
             fixGridSpan(2)
+
+            addLoader(R.layout.item_loader) {
+                idLoader = R.id.progress_circular
+                idTextError = R.id.error_text_view
+            }
 
             viewModel.getCuratedPhoto().observe(context as LifecycleOwner, Observer {
                 submitList(it)

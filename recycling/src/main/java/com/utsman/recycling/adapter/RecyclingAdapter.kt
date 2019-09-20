@@ -21,13 +21,18 @@ import com.utsman.recycling.extentions.NetworkState
 import com.utsman.recycling.viewholder.BaseViewHolder
 import com.utsman.recycling.viewholder.NetworkViewHolder
 
-class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifierId: LoaderIdentifierId? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclingAdapter<T>(private val layoutRes: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var item: T? = null
     private lateinit var setup: Binding<*>.(view: View, position: Int, item: Any?) -> Unit
     private var networkState: NetworkState? = null
     private val list: MutableList<T?> = mutableListOf()
     private var diffResult: DiffUtil.DiffResult? = null
+    private var loaderIdentifierId: LoaderIdentifierId? = null
+
+    internal fun addIdentifierId(loaderIdentifierId: LoaderIdentifierId) {
+        this.loaderIdentifierId = loaderIdentifierId
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -69,6 +74,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
                 val idLoader = loaderIdentifierId?.idLoader
                 val idTextView = loaderIdentifierId?.idTextError
                 val netHolder = holder as NetworkViewHolder
+
                 netHolder.bind(idLoader, idTextView, networkState)
             }
         }
@@ -142,9 +148,6 @@ class RecyclingAdapter<T>(private val layoutRes: Int, private var loaderIdentifi
         }
     }
 }
-
-
-
 
 object TYPE {
     const val ITEM = 0

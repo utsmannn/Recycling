@@ -9,23 +9,22 @@ package com.utsman.recycling.extentions
 import android.content.Context
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.utsman.recycling.adapter.RecyclingAdapter
 import com.utsman.recycling.listener.EndlessScrollListener
 
 @Suppress("UNCHECKED_CAST")
-class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: LoaderIdentifierId?) {
-    internal val adapter = RecyclingAdapter<T>(layout, identifierId)
+class Recycling<T>(layout: Int, val recyclerView: RecyclerView) {
+    internal val adapter = RecyclingAdapter<T>(layout)
     internal val context: Context = recyclerView.context
 
     fun getList(): List<T?> = adapter.getCurrentList()
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager)  {
         recyclerView.layoutManager = layoutManager
-    }
-
-    fun setDivider(orientation: Int) {
-        recyclerView.addItemDecoration(DividerItemDecoration(context, orientation))
     }
 
     fun submitList(list: List<T>?) {
@@ -69,14 +68,18 @@ class Setup<T>(layout: Int, val recyclerView: RecyclerView, identifierId: Loader
         })
     }
 
-
     fun bind(bind: Binding<T>.(itemView: View, position: Int, item: T?) -> Unit) {
         adapter.setBinding(bind as Binding<*>.(view: View, position: Int, item: Any?) -> Unit)
+    }
+
+    fun addLoader(layoutRes: Int, loader: LoaderIdentifierId.() -> Unit) {
+        val loaderIdentifierId = LoaderIdentifierId(layoutRes = layoutRes)
+        loader(loaderIdentifierId)
+        adapter.addIdentifierId(loaderIdentifierId)
     }
 
     init {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-
     }
 }

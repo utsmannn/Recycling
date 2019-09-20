@@ -6,18 +6,6 @@
 
 package com.utsman.recycling.paged.extentions
 
-data class LoaderIdentifierId(val layoutRes: Int? = null,
-                              val idLoader: Int? = null,
-                              val idTextError: Int? = null) {
-
-    data class Builder(private var loaderRes: Int? = null,
-                       private var idLoader: Int? = null,
-                       private var idTextError: Int? = null) {
-
-        fun setLoaderRes(id: Int) = apply { this.loaderRes = id }
-        fun setIdProgressLoader(id: Int) = apply { this.idLoader = id }
-        fun setIdTextViewError(id: Int) = apply { this.idTextError = id }
-
-        fun build() = LoaderIdentifierId(loaderRes, idLoader, idTextError)
-    }
-}
+data class LoaderIdentifierId(internal var layoutRes: Int? = null,
+                              var idLoader: Int? = null,
+                              var idTextError: Int? = null)
