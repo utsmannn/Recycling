@@ -47,10 +47,6 @@ class MainActivity : AppCompatActivity() {
 
             viewModel.getCuratedPhoto().observe(context as LifecycleOwner, Observer {
                 submitList(it)
-
-                /*it.map { item ->
-                    submitItem(item)
-                }*/
             })
 
             viewModel.getLoader().observe(context as LifecycleOwner, Observer {

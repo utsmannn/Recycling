@@ -1,5 +1,7 @@
 ## Recycling is Easy, No Adapter !
 [ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg?version=0.2.6-android) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/0.2.6-android/link)
+
 <br>
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
 Support normal and paged adapter RecyclerView base on Android Paging Library
@@ -7,15 +9,26 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ![](https://i.ibb.co/DkQ1Lmn/carbon.png)
 
 
-### Download
+### Download for AndroidX (version 1.2.6)
 ***For standard adapter***
 ```gradle
-implementation 'com.utsman.recycling:recycling:0.1.3'
+implementation 'com.utsman.recycling:recycling:1.2.6'
 ```
 
 ***For paged adapter***
 ```gradle
-implementation 'com.utsman.recycling-paged:recycling:0.1.3'
+implementation 'com.utsman.recycling-paged:recycling:1.2.6'
+```
+
+### Download for Android (version 0.2.6-android)
+***For standard adapter***
+```gradle
+implementation 'com.utsman.recycling:recycling:0.2.6-android'
+```
+
+***For paged adapter***
+```gradle
+implementation 'com.utsman.recycling-paged:recycling:0.2.6-android'
 ```
 
 ### Setup
@@ -45,10 +58,12 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```setLayoutManager(layout_manager)``` | recycling layout manager |
 | ```setDivider(divider)``` | add divider |
 | ```submitList(list)``` | submit your list |
+| ```submitItem(item)``` | add item in list (**only for normal adapter**) |
 | ```submitNetwork(networkState)``` | submit network state |
 | ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state enabled |
-| ```onPagingListener(layoutManager)``` | paging helper for standard recycler view |
-| ```submitItem(item)``` | add item in list (**only for normal adapter**) |
+| ```onPagingListener(layoutManager)``` | paging helper (**only for normal adapter**) |
+| ```addLoader(layout) {  }``` | add loader |
+
 
 ### Bind
 In lamba of recycling, use ```bind``` to instead viewholder 
@@ -96,7 +111,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 }
 ```
 
-### Network State Loader
+### Network State Loader (Optional)
 This library support for network loader, use paged recycling is recommended
 #### Create your loader layout
 ```xml
@@ -128,27 +143,19 @@ This library support for network loader, use paged recycling is recommended
 </LinearLayout>
 ```
 
-#### Create LoaderIdentifierId for identifier view and id
+#### Create loader
+For create loader, use ```addLoader(layout)``` bind your id in layout loader
 ```kotlin
-val identifierId = LoaderIdentifierId.Builder()
-    .setLoaderRes(R.layout.item_loader) // for normal adapter use .setLayoutRes(layout)
-    .setIdProgressLoader(R.id.progress_circular)
-    .setIdTextViewError(R.id.error_text_view)
-    .build()
-```
-
-#### Add identifier to your recycling
-<pre>
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view, <b>identifierId</b>) { adapter, context, list ->
-    ...
-
+addLoader(R.layout.item_loader) {
+    idLoader = R.id.progress_circular
+    idTextError = R.id.error_text_view
 }
-</pre>
+```
 
 #### Fix progressBar position for grid layout
 Use ```fixGridSpan(column_size)```
 ```kotlin
-recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
+recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
 
     ...
     
@@ -161,7 +168,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view, identifierId) { adapter
 #### For standard recycling (not recommended)
 Use ```onPagingListener(layoutManager)``` for paging recycler
 ```kotlin
-recyclerView.setupAdapter<Item>(R.layout.item_view, identifierId) { adapter, context, list ->
+recyclerView.setupAdapter<Item>(R.layout.item_view) { adapter, context, list ->
 
     ...
    

@@ -43,16 +43,6 @@ class MainActivity : AppCompatActivity() {
                 idTextError = R.id.error_text_view
             }
 
-            /*addLoader { error ->
-                layoutRes = R.layout.item_loader
-                idLoader = R.id.progress_circular
-                idTextError = R.id.error_text_view
-
-                errorMsg = "aaaaaaaa ----- $error"
-            }*/
-
-
-
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
             setLayoutManager(layoutManager)
             fixGridSpan(2)
