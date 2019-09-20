@@ -6,8 +6,8 @@
 
 package com.utsman.recycling.paged.viewholder
 
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.paged.extentions.Binding
 
 @Suppress("UNCHECKED_CAST")

@@ -6,8 +6,8 @@
 
 package com.utsman.recycling.samplepaged.data
 
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.ItemKeyedDataSource
+import android.arch.lifecycle.MutableLiveData
+import android.arch.paging.ItemKeyedDataSource
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.Responses
 import com.utsman.recycling.core.loge

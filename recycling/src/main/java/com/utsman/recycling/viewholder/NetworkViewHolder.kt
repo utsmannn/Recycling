@@ -7,9 +7,9 @@
 package com.utsman.recycling.viewholder
 
 import android.annotation.SuppressLint
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.extentions.NetworkState
 import com.utsman.recycling.extentions.Status
 

@@ -6,9 +6,9 @@
 
 package com.utsman.recycling.sample
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import com.utsman.recycling.extentions.NetworkState
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.Responses

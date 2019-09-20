@@ -6,11 +6,11 @@
 
 package com.utsman.recycling.samplepaged
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.ViewModel
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.paged.extentions.NetworkState
 import com.utsman.recycling.samplepaged.data.PexelDataFactory

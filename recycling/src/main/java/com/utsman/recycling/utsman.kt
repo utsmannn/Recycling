@@ -7,7 +7,7 @@
 package com.utsman.recycling
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 import com.utsman.recycling.adapter.RecyclingAdapter
 import com.utsman.recycling.extentions.Recycling
 

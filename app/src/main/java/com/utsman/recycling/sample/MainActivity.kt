@@ -6,16 +6,16 @@
 
 package com.utsman.recycling.sample
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
-import com.utsman.recycling.*
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.load
 import com.utsman.recycling.extentions.Recycling
+import com.utsman.recycling.setupAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_view.view.*
 
@@ -42,16 +42,6 @@ class MainActivity : AppCompatActivity() {
                 idLoader = R.id.progress_circular
                 idTextError = R.id.error_text_view
             }
-
-            /*addLoader { error ->
-                layoutRes = R.layout.item_loader
-                idLoader = R.id.progress_circular
-                idTextError = R.id.error_text_view
-
-                errorMsg = "aaaaaaaa ----- $error"
-            }*/
-
-
 
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
             setLayoutManager(layoutManager)

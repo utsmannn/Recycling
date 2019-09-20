@@ -6,14 +6,12 @@
 
 package com.utsman.recycling.paged.extentions
 
+import android.arch.paging.PagedList
 import android.content.Context
-import android.util.Log
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import androidx.paging.PagedList
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.utsman.recycling.paged.adapter.RecyclingAdapter
 
 @Suppress("UNCHECKED_CAST")

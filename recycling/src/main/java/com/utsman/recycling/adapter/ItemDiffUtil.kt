@@ -6,7 +6,8 @@
 
 package com.utsman.recycling.adapter
 
-import androidx.recyclerview.widget.DiffUtil
+import android.support.v7.util.DiffUtil
+
 
 class ItemDiffUtil<T>(private val oldList: List<T>, private val newList: List<T>) : DiffUtil.Callback() {
 

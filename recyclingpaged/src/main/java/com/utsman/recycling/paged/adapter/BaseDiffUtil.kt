@@ -7,7 +7,7 @@
 package com.utsman.recycling.paged.adapter
 
 import android.annotation.SuppressLint
-import androidx.recyclerview.widget.DiffUtil
+import android.support.v7.util.DiffUtil
 
 class BaseDiffUtil<T> : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean = oldItem == newItem

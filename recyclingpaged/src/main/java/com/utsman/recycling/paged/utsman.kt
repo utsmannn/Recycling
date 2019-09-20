@@ -6,9 +6,9 @@
 
 package com.utsman.recycling.paged
 
+import android.arch.paging.PagedList
 import android.content.Context
-import androidx.paging.PagedList
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 import com.utsman.recycling.paged.adapter.RecyclingAdapter
 import com.utsman.recycling.paged.extentions.Recycling
 

@@ -6,8 +6,8 @@
 
 package com.utsman.recycling.samplepaged.data
 
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.DataSource
+import android.arch.lifecycle.MutableLiveData
+import android.arch.paging.DataSource
 import com.utsman.recycling.core.Pexel
 
 class PexelDataFactory : DataSource.Factory<Long, Pexel>() {
