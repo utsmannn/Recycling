@@ -1,4 +1,4 @@
-## Recycling is Easy, No Adapter !
+# Recycling is Easy, No Adapter !
 [ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
 [ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg?version=0.2.6-android) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/0.2.6-android/link)
 
@@ -9,7 +9,7 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ![](https://i.ibb.co/DkQ1Lmn/carbon.png)
 
 
-### Download for AndroidX (version 1.2.6)
+## Download for AndroidX (version 1.2.6)
 ***For standard adapter***
 ```gradle
 implementation 'com.utsman.recycling:recycling:1.2.6'
@@ -20,7 +20,7 @@ implementation 'com.utsman.recycling:recycling:1.2.6'
 implementation 'com.utsman.recycling-paged:recycling:1.2.6'
 ```
 
-### Download for Android (version 0.2.6-android)
+## Download for Android (version 0.2.6-android)
 ***For standard adapter***
 ```gradle
 implementation 'com.utsman.recycling:recycling:0.2.6-android'
@@ -31,7 +31,7 @@ implementation 'com.utsman.recycling:recycling:0.2.6-android'
 implementation 'com.utsman.recycling-paged:recycling:0.2.6-android'
 ```
 
-### Setup
+## Setup
 
 ***For standard*** use ```.setupAdapter<>```
 ```kotlin
@@ -65,7 +65,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```addLoader(layout) {  }``` | add loader |
 
 
-### Bind
+## Bind
 In lamba of recycling, use ```bind``` to instead viewholder 
 
 ```kotlin
@@ -90,7 +90,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```position``` | item position |
 
 
-### Layout Manager
+## Layout Manager
 Default layout manager is ```LinearLayoutManager```, you can set layout manager with
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
@@ -101,7 +101,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 }
 ```
 
-### Submit List
+## Submit List
 You can set list / submit list inside lamba with ```submitList(list)```
 ```kotlin
 recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, list ->
@@ -111,7 +111,7 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 }
 ```
 
-### Network State Loader (Optional)
+## Network State Loader (Optional)
 This library support for network loader, use paged recycling is recommended
 #### Create your loader layout
 ```xml
@@ -195,7 +195,7 @@ recyclerView.setupAdapter<Item>(R.layout.item_view) { adapter, context, list ->
 }
 ```
 
-### Sample Code
+## Sample Code
 
 #### Super Simple Sample
 Just list of string
