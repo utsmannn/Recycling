@@ -195,10 +195,31 @@ recyclerView.setupAdapter<Item>(R.layout.item_view) { adapter, context, list ->
 }
 ```
 
-#### Sample
-[Pexel app](https://github.com/utsmannn/Recycling/tree/master/app/src/main/java/com/utsman/recycling/sample) <br>
-[Pexel app paging](https://github.com/utsmannn/Recycling/tree/master/apppaged/src/main/java/com/utsman/recycling/samplepaged)
+### Sample Code
 
+#### Super Simple Sample
+Just list of string
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val listData = listOf("satu", "dua", "tiga", "empat")
+
+        main_recycler_view.setupAdapter<String>(R.layout.simple_item_view) { adapter, context, list ->
+            bind { itemView, position, item ->
+                itemView.name_item.text = item
+            }
+
+            submitList(listData)
+        }
+    }
+}
+```
+
+#### Advanced Sample with API, pattern and NetworkState
 For this sample code, I using Pexel Api for get photos and viewmodel pattern
 ```kotlin
 // View Model
@@ -214,6 +235,7 @@ class SampleViewModel : ViewModel() {
         // network state is loading
         networkState.postValue(NetworkState.LOADING)
 
+        // call api
         instance.getCuratedPhoto(perPage, page)
             .enqueue(object : Callback<Responses> {
                 override fun onFailure(call: Call<Responses>, t: Throwable) {
@@ -306,6 +328,9 @@ class MainActivity : AppCompatActivity() {
 
 ```
 
+#### Sample Projects
+[Pexel app](https://github.com/utsmannn/Recycling/tree/master/app/src/main/java/com/utsman/recycling/sample) <br>
+[Pexel app paging](https://github.com/utsmannn/Recycling/tree/master/apppaged/src/main/java/com/utsman/recycling/samplepaged)
 
 ---
 ```
