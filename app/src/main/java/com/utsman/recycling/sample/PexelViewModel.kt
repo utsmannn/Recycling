@@ -23,16 +23,23 @@ class PexelViewModel : ViewModel() {
 
     fun getCuratedPhoto(perPage: Int, page: Int): LiveData<List<Pexel>?> {
         val newList: MutableLiveData<List<Pexel>?> = MutableLiveData()
+
+        // network state is loading
         networkState.postValue(NetworkState.LOADING)
+
         instance.getCuratedPhoto(perPage, page)
             .enqueue(object : Callback<Responses> {
                 override fun onFailure(call: Call<Responses>, t: Throwable) {
+
+                    // network state error with error message
                     networkState.postValue(NetworkState.error("error network: ${t.message}"))
                 }
 
                 override fun onResponse(call: Call<Responses>, response: Response<Responses>) {
                     val listResponse = response.body()?.photos
                     newList.postValue(listResponse)
+
+                    // network state loaded
                     networkState.postValue(NetworkState.LOADED)
                 }
 

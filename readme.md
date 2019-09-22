@@ -152,6 +152,22 @@ addLoader(R.layout.item_loader) {
 }
 ```
 
+#### Submit your NetworkState
+Add network state in viewmodel or etc for user to see data process
+```kotlin
+// for error state
+networkState.postValue(NetworkState.error("error network: ${t.message}"))
+
+// for loading state
+networkState.postValue(NetworkState.LOADING)
+
+// for loaded state
+networkState.postValue(NetworkState.LOADED)
+
+// and submit in your recycling
+submitNetworkState(networkState)
+```
+
 #### Fix progressBar position for grid layout
 Use ```fixGridSpan(column_size)```
 ```kotlin
@@ -182,6 +198,113 @@ recyclerView.setupAdapter<Item>(R.layout.item_view) { adapter, context, list ->
 #### Sample
 [Pexel app](https://github.com/utsmannn/Recycling/tree/master/app/src/main/java/com/utsman/recycling/sample) <br>
 [Pexel app paging](https://github.com/utsmannn/Recycling/tree/master/apppaged/src/main/java/com/utsman/recycling/samplepaged)
+
+For this sample code, I using Pexel Api for get photos and viewmodel pattern
+```kotlin
+// View Model
+class SampleViewModel : ViewModel() {
+
+    private val instance = RetrofitInstance.create()
+    private val networkState: MutableLiveData<NetworkState> = MutableLiveData()
+
+    // get list
+    fun getCuratedPhoto(perPage: Int, page: Int): LiveData<List<Pexel>?> {
+        val newList: MutableLiveData<List<Pexel>?> = MutableLiveData()
+
+        // network state is loading
+        networkState.postValue(NetworkState.LOADING)
+
+        instance.getCuratedPhoto(perPage, page)
+            .enqueue(object : Callback<Responses> {
+                override fun onFailure(call: Call<Responses>, t: Throwable) {
+
+                    // network state error with error message
+                    networkState.postValue(NetworkState.error("error network: ${t.message}"))
+                }
+
+                override fun onResponse(call: Call<Responses>, response: Response<Responses>) {
+                    val listResponse = response.body()?.photos
+                    newList.postValue(listResponse)
+
+                    // network state loaded
+                    networkState.postValue(NetworkState.LOADED)
+                }
+
+            })
+
+        return newList
+    }
+
+    // get network state
+    fun getNetworkState(): LiveData<NetworkState> = networkState
+
+}
+
+// Activity
+class MainActivity : AppCompatActivity() {
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this)[PexelViewModel::class.java]
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // setup recycling
+        main_recycler_view.setupAdapter<Pexel>(R.layout.item_view) { adapter, context, list ->
+
+            // bind is viewholder function
+            bind { itemView, position, item ->
+
+                itemView.img_view.load(item?.src?.small)
+                itemView.setOnClickListener {
+                    Toast.makeText(context, "wee ${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            // add loader state
+            addLoader(R.layout.item_loader) {
+                idLoader = R.id.progress_circular
+                idTextError = R.id.error_text_view
+            }
+
+            // using grid layout manager
+            val layoutManager = GridLayoutManager(this@MainActivity, 2)
+            setLayoutManager(layoutManager)
+            
+            // for grid layout manager, loader by default is ugly, to fix use fixGridSpan
+            fixGridSpan(2)
+
+            // call function setupData with page 1
+            setupData(this, 1)
+
+            // use paging listener for endless recycler view and loaded data
+            onPagingListener(layoutManager) { page, itemCount ->
+            
+                // call function setup data with page +1
+                setupData(this@setupAdapter, page+1)
+            }
+        }
+    }
+
+    // function for setup data
+    private fun setupData(recycling: Recycling<Pexel>, page: Int) {
+        viewModel.getCuratedPhoto(20, page).observe(this, Observer {
+            
+            // submit list from viewmodel into recycling
+            recycling.submitList(it)
+        })
+
+        viewModel.getNetworkState().observe(this, Observer {
+        
+            // submit network state from viewmodel into recycling
+            recycling.submitNetworkState(it)
+        })
+    }
+}
+
+```
 
 
 ---

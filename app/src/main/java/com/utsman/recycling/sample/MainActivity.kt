@@ -6,6 +6,7 @@
 
 package com.utsman.recycling.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         main_recycler_view.setupAdapter<Pexel>(R.layout.item_view) { adapter, context, list ->
 
             bind { itemView, position, item ->
+
                 itemView.img_view.load(item?.src?.small)
                 itemView.setOnClickListener {
                     Toast.makeText(context, "wee ${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
