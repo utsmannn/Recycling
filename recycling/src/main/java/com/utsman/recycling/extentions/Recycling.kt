@@ -21,13 +21,13 @@ class Recycling<T>(layout: Int, val recyclerView: RecyclerView) {
     internal val adapter = RecyclingAdapter<T>(layout)
     internal val context: Context = recyclerView.context
 
-    fun getList(): List<T?> = adapter.getCurrentList()
+    fun getList(): List<T?>? = adapter.getCurrentList()
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager)  {
         recyclerView.layoutManager = layoutManager
     }
 
-    fun submitList(list: List<T>?) {
+    fun submitList(list: List<T?>?) {
         Log.i("utsman", "start submit list")
         adapter.addList(list)
     }

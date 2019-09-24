@@ -12,13 +12,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 ext {
     bintrayRepo = "utsman"
-    bintrayName = "com.utsman.recycling-paged"
+    bintrayName = "com.utsman.recycling-paged-android"
 
     libraryName = 'recycling'
 
-    publishedGroupId = 'com.utsman.recycling-paged'
+    publishedGroupId = 'com.utsman.recycling-paged-android'
     artifact = 'recycling'
-    libraryVersion = '0.2.6-android'
+    libraryVersion = '1.2.7'
 
     libraryDescription = 'One line setup recyclerview'
     siteUrl = 'https://github.com/utsmannn/Recycling'
@@ -39,7 +39,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
-        versionName "0.2.6-android"
+        versionName "1.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
