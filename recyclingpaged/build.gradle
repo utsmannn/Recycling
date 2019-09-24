@@ -18,7 +18,7 @@ ext {
 
     publishedGroupId = 'com.utsman.recycling-paged'
     artifact = 'recycling'
-    libraryVersion = '1.2.7'
+    libraryVersion = '1.3.7'
 
     libraryDescription = 'One line setup recyclerview'
     siteUrl = 'https://github.com/utsmannn/Recycling'
@@ -29,7 +29,6 @@ ext {
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
-
 }
 
 android {
@@ -39,7 +38,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
-        versionName "1.2.7"
+        versionName "1.3.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

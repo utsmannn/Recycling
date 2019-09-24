@@ -13,6 +13,18 @@ import com.utsman.recycling.extentions.Recycling
 
 fun <T> RecyclerView.setupAdapter(layout: Int, recycling: Recycling<T>.(adapter: RecyclingAdapter<T>, context: Context, list: List<T?>?) -> Unit) {
     val setupAdapter = Recycling<T>(layout, this)
-
     recycling(setupAdapter, setupAdapter.adapter, setupAdapter.context, setupAdapter.getList())
+}
+
+class RecyclingBuilder<T>(private var layout: Int? = null, private var recyclerView: RecyclerView? = null) {
+    fun setLayout(layout: Int) = apply { this.layout = layout }
+    fun setRecyclerView(recyclerView: RecyclerView) = apply { this.recyclerView = recyclerView }
+
+    fun build(recycling: (Recycling<T>, RecyclingAdapter<T>, Context, MutableList<out T>) -> Boolean): RecyclingBuilder<*>? {
+        val setupAdapter = Recycling<T>(layout!!, recyclerView!!)
+        recycling(setupAdapter, setupAdapter.adapter, setupAdapter.context,
+            setupAdapter.getList() as MutableList<out T>
+        )
+        return this
+    }
 }

@@ -17,3 +17,5 @@ fun loge(msg: String) = Log.e("anjay", msg)
 
 fun ImageView.load(url: String?) = Picasso.get().load(url).into(this)
 fun Context.toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+fun loadImg(imgView: ImageView, url: String?) = Picasso.get().load(url).into(imgView)

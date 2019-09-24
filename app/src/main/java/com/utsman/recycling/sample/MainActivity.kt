@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
                 itemView.img_view.load(item?.src?.small)
                 itemView.setOnClickListener {
-                    Toast.makeText(context, "wee ${adapter.itemCount} - ${list.size} - $position", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "wee ${adapter.itemCount} - ${list?.size} - $position", Toast.LENGTH_SHORT).show()
                 }
             }
 

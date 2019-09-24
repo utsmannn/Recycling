@@ -24,7 +24,7 @@ class SimpleActivity : AppCompatActivity() {
         val listData = listOf("satu", "dua", "tiga", "empat")
         val listLoop = listOf("lima", "enem", "tujuh")
 
-        main_recycler_view.setupAdapter<String>(R.layout.simple_item_view) {adapter, context, list ->
+        main_recycler_view.setupAdapter<String>(R.layout.simple_item_view) { adapter, context, list ->
             bind { itemView, position, item ->
                 itemView.name_item.text = item
                 itemView.setOnClickListener {

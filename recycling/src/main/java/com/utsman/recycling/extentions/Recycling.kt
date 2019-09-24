@@ -82,4 +82,24 @@ class Recycling<T>(layout: Int, val recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
+
+    data class Builder<T>(internal var layout: Int? = null, internal var recyclerView: RecyclerView? = null) {
+        fun setLayout(layout: Int) = apply { this.layout = layout }
+        fun setRecyclerView(recyclerView: RecyclerView) = apply { this.recyclerView = recyclerView }
+
+        fun build() = Recycling<T>(layout!!, recyclerView!!)
+    }
 }
+
+/*
+open class RecyclingBuilder {
+    val layout: Int? = null
+    private val recyclerView: RecyclerView? = null
+
+    class Builder(private var layout: Int, private var recyclerView: RecyclerView) {
+        fun setLayout(layout: Int) = apply { this.layout = layout }
+        fun setRecyclerView(recyclerView: RecyclerView) = apply { this.recyclerView = recyclerView }
+
+        fun build() = RecyclingBuilder
+    }
+}*/
