@@ -124,7 +124,7 @@ class RecyclingAdapter<T>(private val layoutRes: Int) : RecyclerView.Adapter<Rec
 
     private fun getItem(): T? = item
 
-    internal fun addList(list: List<T>?) {
+    internal fun addList(list: List<T?>?) {
         Log.i("utsman", "submitting list.. ${list?.size}")
         if (list != null) {
             val diffUtil = ItemDiffUtil(this.list, list)

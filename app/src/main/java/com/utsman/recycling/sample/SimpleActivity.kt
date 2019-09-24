@@ -6,9 +6,11 @@
 
 package com.utsman.recycling.sample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.utsman.recycling.core.toast
 import com.utsman.recycling.setupAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.simple_item_view.view.*
@@ -25,6 +27,9 @@ class SimpleActivity : AppCompatActivity() {
         main_recycler_view.setupAdapter<String>(R.layout.simple_item_view) {adapter, context, list ->
             bind { itemView, position, item ->
                 itemView.name_item.text = item
+                itemView.setOnClickListener {
+                    toast(this@SimpleActivity.javaClass.name)
+                }
             }
 
             submitList(listData)

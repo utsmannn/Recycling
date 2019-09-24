@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.utsman.recycling.*
 import com.utsman.recycling.core.Pexel
 import com.utsman.recycling.core.load
+import com.utsman.recycling.core.toast
 import com.utsman.recycling.extentions.Recycling
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_view.view.*
