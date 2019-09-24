@@ -1,6 +1,5 @@
 # Recycling is Easy, No Adapter !
 [ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
-[ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg?version=0.2.6-android) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/0.2.6-android/link)
 
 <br>
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
@@ -9,26 +8,26 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 ![](https://i.ibb.co/DkQ1Lmn/carbon.png)
 
 
-## Download for AndroidX (version 1.2.6)
+## Download for AndroidX
 ***For standard adapter***
 ```gradle
-implementation 'com.utsman.recycling:recycling:1.2.6'
+implementation "com.utsman.recycling:recycling:${latest}"
 ```
 
 ***For paged adapter***
 ```gradle
-implementation 'com.utsman.recycling-paged:recycling:1.2.6'
+implementation "com.utsman.recycling-paged:recycling:${latest}"
 ```
 
-## Download for Android (version 0.2.6-android)
+## Download for Android
 ***For standard adapter***
 ```gradle
-implementation 'com.utsman.recycling:recycling:0.2.6-android'
+implementation "com.utsman.recycling-android:recycling:${latest}"
 ```
 
 ***For paged adapter***
 ```gradle
-implementation 'com.utsman.recycling-paged:recycling:0.2.6-android'
+implementation "com.utsman.recycling-paged-android:recycling:${latest}"
 ```
 
 ## Setup
