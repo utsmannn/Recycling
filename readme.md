@@ -7,9 +7,6 @@ Support normal and paged adapter RecyclerView base on Android Paging Library
 
 ![](https://i.ibb.co/DkQ1Lmn/carbon.png)
 
-## Support Java since version 1.3.*
-[This guide for java](#java-support)
-<br>
 ## Download for AndroidX
 ***For standard adapter***
 ```gradle
@@ -328,54 +325,6 @@ class MainActivity : AppCompatActivity() {
 }
 
 ```
-
-<h3 id="java-support"></h3>
-
-# Java Support
-This library based on Kotlin, but for some consideration I added a builder class for Java. You can use all features in Java.
-
-## Requirement java 8
-Just enable java 8 in gradle for lambda support
-```gradle
-android {
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-}
-```
-
-## Setup
-For setup, use ```RecyclingBuilder<>``` for build your instant adapter
-```java
-new RecyclingBuilder<String>()
-        .setLayout(R.layout.simple_item_view) // add layout item view
-        .setRecyclerView(recyclerView) // add your recyclerview
-        .build((recycling, adapter, context, itemList) -> {
-            
-            // setup recycling in build
-            
-            // bind like viewholder
-            recycling.bind((bind, view, position, item) -> {
-                
-                TextView textView = view.findViewById(R.id.name_item);
-                textView.setText(item);
-                return null;
-            });
-
-            
-            for(int i=1;i<=100;i++){
-                
-                // submit item or list
-                recycling.submitItem("item ke " + i);
-            }
-
-            return true;
-        });
-```
-[Sample ```SimpleJavaActivity.java```](https://github.com/utsmannn/Recycling/blob/master/app/src/main/java/com/utsman/recycling/sample/javasample/SimpleJavaActivity.java)
 
 #### Sample Projects
 [Pexel app](https://github.com/utsmannn/Recycling/tree/master/app/src/main/java/com/utsman/recycling/sample) <br>

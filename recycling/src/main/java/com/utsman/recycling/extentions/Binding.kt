@@ -7,5 +7,6 @@
 package com.utsman.recycling.extentions
 
 import android.view.View
+import com.utsman.recycling.javabuilder.BindBuilder
 
-class Binding<T>(internal val itemView: View, internal val item: T?, internal val position: Int)
+class Binding<T>(internal var itemView: View, internal var item: T?, internal var position: Int)

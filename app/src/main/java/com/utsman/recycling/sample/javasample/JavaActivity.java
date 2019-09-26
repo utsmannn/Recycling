@@ -20,6 +20,8 @@ import com.utsman.recycling.core.Pexel;
 import com.utsman.recycling.sample.PexelViewModel;
 import com.utsman.recycling.sample.R;
 
+import kotlin.Unit;
+
 import static com.utsman.recycling.core.AppKt.loadImg;
 
 public class JavaActivity extends AppCompatActivity {
@@ -42,19 +44,19 @@ public class JavaActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(gridLayoutManager);
                     recycling.fixGridSpan(2);
 
-                    recycling.bind((binding, view, position, pexel) -> {
+                    /*recycling.bind((binding, view, position, pexel) -> {
                         // bind your item view
                         ImageView imageView = view.findViewById(R.id.img_view);
                         loadImg(imageView, pexel.getSrc().getSmall());
 
-                        return null;
-                    });
+                        return Unit.INSTANCE;
+                    });*/
 
                     // add network loader
                     recycling.addLoader(R.layout.item_loader, loaderIdentifierId -> {
                         loaderIdentifierId.setIdLoader(R.id.progress_circular);
                         loaderIdentifierId.setIdTextError(R.id.error_text_view);
-                        return null;
+                        return Unit.INSTANCE;
                     });
 
                     pexelViewModel.getCuratedPhoto(30, 1).observe(this, recycling::submitList);
@@ -63,7 +65,7 @@ public class JavaActivity extends AppCompatActivity {
                     // paging helper
                     recycling.onPagingListener(gridLayoutManager, (endlessScrollListener, page, itemCount) -> {
                         pexelViewModel.getCuratedPhoto(30,  page+1).observe(this, recycling::submitList);
-                        return null;
+                        return Unit.INSTANCE;
                     });
 
                     return true;

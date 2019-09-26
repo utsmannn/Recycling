@@ -6,6 +6,7 @@
 
 package com.utsman.recycling.sample.javasample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,8 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.utsman.recycling.javabuilder.BindBuilder;
+import com.utsman.recycling.javabuilder.Builder;
 import com.utsman.recycling.RecyclingBuilder;
+import com.utsman.recycling.adapter.RecyclingAdapter;
+import com.utsman.recycling.extentions.Recycling;
 import com.utsman.recycling.sample.R;
+
+import java.util.List;
 
 public class SimpleJavaActivity extends AppCompatActivity {
 
@@ -25,21 +32,39 @@ public class SimpleJavaActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.main_recycler_view);
 
+
         new RecyclingBuilder<String>()
                 .setLayout(R.layout.simple_item_view)
                 .setRecyclerView(recyclerView)
-                .build((recycling, adapter, context, item) -> {
-                    recycling.bind((bind, view, position, item1) -> {
-                        TextView textView = view.findViewById(R.id.name_item);
-                        textView.setText(item1);
-                        return null;
-                    });
+                .building(new Builder() {
 
-                    for(int i=1;i<=100;i++){
-                        recycling.submitItem("item ke " + i);
+                    @Override
+                    public void invoke(Recycling recycling, RecyclingAdapter recyclingAdapter, Context context, List list) {
+
+
+
+
+                        /*recycling.bindJava(new BindBuilder() {
+                            @Override
+                            public void invoke(Binding binding, View view, Integer position, Object item) {
+                                String text = (String) item;
+                                TextView textView = view.findViewById(R.id.name_item);
+                                textView.setText(text);
+                            }
+                        });*/
+
+                        recycling.bindJava((view, item, position) -> {
+                            String text = (String) item;
+                            TextView textView = view.findViewById(R.id.name_item);
+                            textView.setText(text);
+                        });
+
+
+
+                        /*for(int i=1;i<=100;i++){
+                            recycling.submitItem("item ke " + i);
+                        }*/
                     }
-
-                    return true;
                 });
     }
 }

@@ -25,12 +25,12 @@ class SimpleActivity : AppCompatActivity() {
         val listLoop = listOf("lima", "enem", "tujuh")
 
         main_recycler_view.setupAdapter<String>(R.layout.simple_item_view) { adapter, context, list ->
-            bind { itemView, position, item ->
+            /*bind { itemView, position, item ->
                 itemView.name_item.text = item
                 itemView.setOnClickListener {
                     toast(this@SimpleActivity.javaClass.name)
                 }
-            }
+            }*/
 
             submitList(listData)
 
