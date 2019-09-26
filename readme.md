@@ -1,13 +1,15 @@
 # Recycling is Easy, No Adapter !
-[ ![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
 
-<br>
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
-Support normal and paged adapter RecyclerView base on Android Paging Library
+Support standard adapter and paged adapter RecyclerView base on Android Paging Library
 
-![](https://i.ibb.co/DkQ1Lmn/carbon.png)
+![](https://i.ibb.co/DtdqXkL/carbon-14.png)
 
-## Download for AndroidX
+## Download
+[![Download](https://api.bintray.com/packages/kucingapes/utsman/com.utsman.recycling-paged/images/download.svg) ](https://bintray.com/kucingapes/utsman/com.utsman.recycling-paged/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Recycling-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7877)
+
+### Download for AndroidX
 ***For standard adapter***
 ```gradle
 implementation "com.utsman.recycling:recycling:${latest}"
@@ -18,7 +20,7 @@ implementation "com.utsman.recycling:recycling:${latest}"
 implementation "com.utsman.recycling-paged:recycling:${latest}"
 ```
 
-## Download for Android
+### Download for Android
 ***For standard adapter***
 ```gradle
 implementation "com.utsman.recycling-android:recycling:${latest}"
@@ -56,10 +58,10 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 | ```setLayoutManager(layout_manager)``` | recycling layout manager |
 | ```setDivider(divider)``` | add divider |
 | ```submitList(list)``` | submit your list |
-| ```submitItem(item)``` | add item in list (**only for normal adapter**) |
+| ```submitItem(item)``` | add item in list (**only for standard adapter**) |
 | ```submitNetwork(networkState)``` | submit network state |
 | ```fixGridSpan(column_size)``` | fix grid span for grid layout when network state enabled |
-| ```onPagingListener(layoutManager)``` | paging helper (**only for normal adapter**) |
+| ```onPagingListener(layoutManager)``` | paging helper (**only for standard adapter**) |
 | ```addLoader(layout) {  }``` | add loader |
 
 
@@ -153,6 +155,9 @@ addLoader(R.layout.item_loader) {
 #### Submit your NetworkState
 Add network state in viewmodel or etc for user to see data process
 ```kotlin
+// define network state with mutable livedata
+val networkState: MutableLiveData<NetworkState> = MutableLiveData()
+
 // for error state
 networkState.postValue(NetworkState.error("error network: ${t.message}"))
 
