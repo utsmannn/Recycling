@@ -113,6 +113,11 @@ recyclerView.setupAdapterPaged<Item>(R.layout.item_view) { adapter, context, lis
 
 ## Network State Loader (Optional)
 This library support for network loader, use paged recycling is recommended
+
+| loader state  | error state |
+|---|---|
+|  ![](https://i.ibb.co/h15LBG7/Screen-Shot-2019-08-11-at-1-16-38-AM-1.png) | ![](https://i.ibb.co/9b4wb8S/Screenshot-20190811-011505-1.png)  |
+
 #### Create your loader layout
 ```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
