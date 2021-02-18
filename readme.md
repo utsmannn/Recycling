@@ -1,4 +1,5 @@
-# Recycling is Easy, No Adapter !
+## Recycling is Easy, No Adapter !
+# DEPRECATED !
 
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
 Support standard adapter and paged adapter RecyclerView base on Android Paging Library
