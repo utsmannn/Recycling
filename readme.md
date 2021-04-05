@@ -1,5 +1,6 @@
 ## Recycling is Easy, No Adapter !
 # DEPRECATED !
+# See other recyclerview library (https://github.com/utsmannn/painless-paging-library)
 
 Make easy and faster RecyclerView without adapter, design for kotlin. <br>
 Support standard adapter and paged adapter RecyclerView base on Android Paging Library
